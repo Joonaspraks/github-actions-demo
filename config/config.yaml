@@ -1,0 +1,12 @@
+http:
+  service:
+    port: 8080
+
+postgresql:
+  connection:
+    host: postgres
+    port: 5432
+    user: postgres
+    pass: postgres
+    db: postgres
+    ssl_mode: disable

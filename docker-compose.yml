@@ -1,0 +1,23 @@
+services:
+  main:
+    build: . # uses Dockerfile in root dir to build the image
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+    ports:
+      - "5432:5432"
+  test:
+    build: . # uses Dockerfile in root dir to build the image
+    depends_on:
+      - postgres
+      - main
+    entrypoint: [ "go", "test", "-v", "./test/e2e/...", "--timeout", "30s" ]
+    environment:
+      TEST_MAIN_SERVICE: http://main:8080
