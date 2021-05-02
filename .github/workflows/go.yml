@@ -22,4 +22,8 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./...
+    - run: docker-compose up --no-start 
+    - run: docker-compose run -d postgres 
+    - run: docker-compose run -d main 
+    - run: docker-compose run test
+
