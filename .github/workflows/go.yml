@@ -21,9 +21,9 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - name: Test
     - run: docker-compose up --no-start 
     - run: docker-compose run -d postgres 
     - run: docker-compose run -d main 
-    - run: docker-compose run test
+    - name: Test
+      run: docker-compose run test
 
